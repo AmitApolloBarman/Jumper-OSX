@@ -22,12 +22,22 @@ void UBTService_CheckForPlayer::TickNode(UBehaviorTreeComponent& OwnerComp, uint
         if (EnemyPC->tChar->EnemyLife<=0)
             OwnerComp.StopTree();
         AJumperCharacter *Enemy = Cast<AJumperCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
-        if (Enemy && EnemyPC->tChar->EnemyLife>0) {
-                switch (EnemyPC->tChar->Mode) {
-                    case EnemyMode::Pursue: OwnerComp.GetBlackboardComponent()->SetValue<UBlackboardKeyType_Object>(EnemyPC->EnemyKeyID,Enemy); break;
-                    default: OwnerComp.GetBlackboardComponent()->SetValue<UBlackboardKeyType_Object>(EnemyPC->EnemyKeyID,EnemyPC);
-                        break;
-                }
-        }
+        if (Enemy && EnemyPC->tChar->EnemyLife>0)
+            ProcessMode(EnemyPC,Enemy,OwnerComp);
     }
 }
+
+void UBTService_CheckForPlayer::ProcessMode(AEnemyAI *EnemyPC, AJumperCharacter *Enemy, UBehaviorTreeComponent& OwnerComp) {
+    switch (EnemyPC->tChar->Mode) {
+        case EnemyMode::Pursue: OwnerComp.GetBlackboardComponent()->SetValue<UBlackboardKeyType_Object>(EnemyPC->EnemyKeyID,Enemy); break;
+        case EnemyMode::Attack:
+        case EnemyMode::Dead:
+        case EnemyMode::Patrol:
+        case EnemyMode::Flee:
+        case EnemyMode::Taunt:
+        case EnemyMode::Talk:
+        default: OwnerComp.GetBlackboardComponent()->SetValue<UBlackboardKeyType_Object>(EnemyPC->EnemyKeyID,EnemyPC);
+            break;
+    }
+}
+
