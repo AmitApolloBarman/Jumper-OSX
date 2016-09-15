@@ -3,19 +3,6 @@
 #include "Jumper.h"
 #include "EnemyCharacter.h"
 
-/*
-UENUM(BlueprintType)
-enum class Modes : uint8
-{
-    Pursue      UMETA(DisplayName="Pursue"),
-    Patrol      UMETA(DisplayName="Patrol"),
-    Attack      UMETA(DisplayName="Attack"),
-    Flee        UMETA(DisplayName="Fleeing"),
-    Talk        UMETA(DisplayName="Talk"),
-    Dead        UMETA(DisplayName="Dead"),
-    Taunt       UMETA(DisplayName="Taunt")
-};*/
-
 // Sets default values
 AEnemyCharacter::AEnemyCharacter() {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
@@ -31,12 +18,14 @@ void AEnemyCharacter::BeginPlay() {
 
 void AEnemyCharacter::ProcessMode(EnemyMode m) {
     switch (m) {
-        case EnemyMode::Pursue: break;
-        case EnemyMode::Patrol: break;
         case EnemyMode::Attack: break;
-        case EnemyMode::Flee: break;
-        case EnemyMode::Talk: break;
         case EnemyMode::Dead: break;
+        case EnemyMode::Flee: break;
+        case EnemyMode::Hit: break;
+        case EnemyMode::Idle: break;
+        case EnemyMode::Patrol: break;
+        case EnemyMode::Pursue: break;
+        case EnemyMode::Talk: break;
         case EnemyMode::Taunt: break;
         default:
             break;
@@ -54,22 +43,24 @@ void AEnemyCharacter::Tick( float DeltaTime ) {
         EnemyLife = EnemyLife + LIFE_INC;
     ProcessMode(Mode);
     if (EnemyLife<=0)
-        ProcessMode(EnemyMode::Dead);
+        SetMode(EnemyMode::Dead);
 }
 
-void AEnemyCharacter::MoveChar(float DeltaTime) {
-    FVector NewLocation = GetActorLocation();
-    float DeltaHeight = (FMath::Sin(RunningTime + DeltaTime) - FMath::Sin(RunningTime));
-    NewLocation.Y += DeltaHeight * Speed;
-    //Scale our distance by a factor of 20
-    RunningTime += DeltaTime;
-    SetActorLocation(NewLocation, collide);
+void AEnemyCharacter::MoveRight(float Value)
+{
+    // add movement in that direction
+    AddMovementInput(FVector(0.f,-1.f,0.f), Value);
+}
+
+void AEnemyCharacter::MoveLeft(float Value)
+{
+    // add movement in that direction
+    AddMovementInput(FVector(0.f,1.f,0.f), Value);
 }
 
 // Called to bind functionality to input
 void AEnemyCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponent) {
 	Super::SetupPlayerInputComponent(InputComponent);
-
 }
 
 void AEnemyCharacter::DecrementLife(float g) {
