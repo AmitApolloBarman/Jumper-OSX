@@ -4,15 +4,19 @@
 
 #include "GameFramework/Character.h"
 #include "EnemyCharacter.generated.h"
+
+// State Machine Mode for Enemy
 UENUM(BlueprintType)
 enum class EnemyMode : uint8
 {
-    Pursue      UMETA(DisplayName="Pursue"),
-    Patrol      UMETA(DisplayName="Patrol"),
     Attack      UMETA(DisplayName="Attack"),
-    Flee        UMETA(DisplayName="Fleeing"),
-    Talk        UMETA(DisplayName="Talk"),
     Dead        UMETA(DisplayName="Dead"),
+    Flee        UMETA(DisplayName="Flee"),
+    Hit         UMETA(DisplayName="Hit"),
+    Idle        UMETA(DisplayName="Idle"),
+    Patrol      UMETA(DisplayName="Patrol"),
+    Pursue      UMETA(DisplayName="Pursue"),
+    Talk        UMETA(DisplayName="Talk"),
     Taunt       UMETA(DisplayName="Taunt")
 };
 
@@ -27,17 +31,26 @@ public:
     UPROPERTY(EditAnywhere, Category = Behavior)
     class UBehaviorTree *ZombieBehavior;
 
-    UFUNCTION(BlueprintCallable,Category = "Enemy Mode")
-    void ProcessMode(EnemyMode m);
-    UFUNCTION(BlueprintCallable,Category = "Enemy Mode")
-    void SetMode(EnemyMode m);
     // Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-	
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
     // Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
+    // Functions
+    UFUNCTION(BlueprintCallable,Category = "Enemy Mode")
+    void ProcessMode(EnemyMode m);
+    UFUNCTION(BlueprintCallable,Category = "Enemy Mode")
+    void SetMode(EnemyMode m);
+	void SetMode(uint8 m);
+
+    UFUNCTION(BlueprintCallable,Category = "Enemy Movement")
+    void MoveLeft(float Value);
+    UFUNCTION(BlueprintCallable,Category = "Enemy Movement")
+    void MoveRight(float Value);
+    UFUNCTION(BlueprintCallable,Category = "Enemy Life")
+    void DecrementLife(float x);
+    // Properties
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Enemy Properties")
     float hit = 0.05;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Enemy Properties")
@@ -50,27 +63,7 @@ public:
     float Radius=25;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Enemy Properties")
     float GlobalAnimationRate=2.5f;
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Floating Movement")
-    bool isVertical;
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Floating Movement")
-    bool isHorizontal;
-    
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Floating Movement")
-    FVector Period = { 1.2f, 0.8f, 1.0f };
-    
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Floating Movement")
-    FVector Scale = { 10.0f, 10.0f, 20.0f };
-    
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Floating Collision")
-    bool collide = false;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Enemy Mode")
     EnemyMode Mode = EnemyMode::Pursue;
-    
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Floating Movement")
-    FRotator Rotation = { 0.0f, 0.0f, 3.0f };
-	float RunningTime = 0.0f;
-    void MoveChar(float DeltaSeconds);
-    
-    UFUNCTION(BlueprintCallable,Category = "Enemy Life")
-    void DecrementLife(float x);
+    float RunningTime = 0.0f;
 };

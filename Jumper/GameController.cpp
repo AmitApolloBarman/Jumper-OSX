@@ -88,7 +88,6 @@ void AGameController::TimeLogic() {
         *ptr->time -= (TIME_DEC/2);
     if (*ptr->time <= MAX_TIME && doTimeLogic)
         *ptr->time += LIFE_INC_BEG/10.0f;
-
 }
 
 void AGameController::LifeLogic() {

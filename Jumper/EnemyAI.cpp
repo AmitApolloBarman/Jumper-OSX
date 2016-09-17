@@ -8,8 +8,6 @@
 #include "BehaviorTree/Blackboard/BlackboardKeyAllTypes.h"
 #include "EnemyCharacter.h"
 
-
-
 AEnemyAI::AEnemyAI() {
     BlackboardComp = CreateDefaultSubobject<UBlackboardComponent>(TEXT("BlackboardComp"));
     BehaviorComp = CreateDefaultSubobject<UBehaviorTreeComponent>(TEXT("BehaviorComp"));
@@ -31,7 +29,11 @@ void AEnemyAI::Possess(APawn *InPawn) {
     if (Char && Char->ZombieBehavior) {
         BlackboardComp->InitializeBlackboard(*Char->ZombieBehavior->BlackboardAsset);
         EnemyKeyID = BlackboardComp->GetKeyID("Target");
-        tChar = Char;
+        PatrolKeyID = BlackboardComp->GetKeyID("PatrolTarget");
+		EnemyModeBBKeyID = BlackboardComp->GetKeyID("EnemyModeBB");
+		isZombieDeadBBKeyID = BlackboardComp->GetKeyID("isZombieDeadBB"); 
+		//BlackboardComp->GetKeyName(BlackboardComp->GetKeyID("EnemyModeBB"))
+		tChar = Char;
         BehaviorComp->StartTree(*Char->ZombieBehavior);
     }
 }

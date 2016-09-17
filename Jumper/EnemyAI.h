@@ -25,7 +25,9 @@ public:
     virtual void Possess(APawn *InPawn) override;
 	
     uint8 EnemyKeyID;
-    
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MoveEnemy")
+    uint8 PatrolKeyID;
+	uint8 EnemyModeBBKeyID;
+	uint8 isZombieDeadBBKeyID;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MoveEnemy")
     bool isDead = false;
 };

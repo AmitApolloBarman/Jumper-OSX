@@ -25,7 +25,7 @@ public:
 
     const float TIME_DEC = 0.00015f;
     const float SKILL_INC = 0.002f;
-    const float SKILL_DEC = 0.00125f;
+    const float SKILL_DEC = 0.0025f;
     const float LIFE_INC_BEG = 0.025f;
     const float LIFE_INC = 0.00025f;
     const float SKILL_INC_BEG = 0.02f;
