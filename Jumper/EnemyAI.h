@@ -5,9 +5,7 @@
 #include "AIController.h"
 #include "EnemyCharacter.h"
 #include "EnemyAI.generated.h"
-/**
- * 
- */
+
 UCLASS()
 class JUMPER_API AEnemyAI : public AAIController {
 	GENERATED_BODY()

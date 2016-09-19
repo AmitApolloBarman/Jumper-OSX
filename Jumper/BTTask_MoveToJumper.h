@@ -5,9 +5,6 @@
 #include "BehaviorTree/Tasks/BTTask_MoveTo.h"
 #include "BTTask_MoveToJumper.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class JUMPER_API UBTTask_MoveToJumper : public UBTTask_MoveTo
 {

@@ -33,6 +33,7 @@ void UBTService_CheckForPlayer::TickNode(UBehaviorTreeComponent& OwnerComp, uint
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, str);
 		*/
 	}
+
 }
 
 void UBTService_CheckForPlayer::ProcessMode(AEnemyAI *EnemyPC, AJumperCharacter *Enemy, UBehaviorTreeComponent& OwnerComp) {
