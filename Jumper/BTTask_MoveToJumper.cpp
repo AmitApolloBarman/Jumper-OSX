@@ -47,7 +47,7 @@ bool UBTTask_MoveToJumper::ProcessMode(AEnemyAI *EnemyPC) {
 	case EnemyMode::Attack:break;
 	case EnemyMode::Dead:break;
 	case EnemyMode::Flee:break;
-	case EnemyMode::Hit:break;
+    case EnemyMode::Hit:break;
 	case EnemyMode::Idle:break;
 	case EnemyMode::Patrol: return true;
 	case EnemyMode::Pursue: return true;

@@ -26,9 +26,7 @@ void UBTService_CheckForPlayer::TickNode(UBehaviorTreeComponent& OwnerComp, uint
                 OwnerComp.GetBlackboardComponent()->SetValue<UBlackboardKeyType_Object>(EnemyPC->PatrolKeyID,EnemyPC);
                 OwnerComp.GetBlackboardComponent()->SetValue<UBlackboardKeyType_Object>(EnemyPC->EnemyKeyID,Enemy);
         }
-		if (EnemyPC->tChar->EnemyLife<=0)
-			OwnerComp.GetBlackboardComponent()->SetValue<UBlackboardKeyType_Object>(EnemyPC->isZombieDeadBBKeyID, false);
-		uint8 EnemyMode = OwnerComp.GetBlackboardComponent()->GetValueAsEnum("EnemyModeBB");
+        uint8 EnemyMode = OwnerComp.GetBlackboardComponent()->GetValueAsEnum("EnemyModeBB");
 		FString str = FString::FromInt(EnemyMode);
 		EnemyPC->tChar->SetMode(EnemyMode);
 		/*

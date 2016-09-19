@@ -18,8 +18,11 @@ AEnemyAI::AEnemyAI() {
 void AEnemyAI::Tick( float DeltaTime ) {
     Super::Tick( DeltaTime );
     if (tChar)
-        if (tChar->EnemyLife<=0)
+        if (tChar->EnemyLife<=0) {
             isDead = true;
+            BehaviorComp->StopTree();
+        }
+    
 }
 
 void AEnemyAI::Possess(APawn *InPawn) {
@@ -32,7 +35,6 @@ void AEnemyAI::Possess(APawn *InPawn) {
         PatrolKeyID = BlackboardComp->GetKeyID("PatrolTarget");
 		EnemyModeBBKeyID = BlackboardComp->GetKeyID("EnemyModeBB");
 		isZombieDeadBBKeyID = BlackboardComp->GetKeyID("isZombieDeadBB"); 
-		//BlackboardComp->GetKeyName(BlackboardComp->GetKeyID("EnemyModeBB"))
 		tChar = Char;
         BehaviorComp->StartTree(*Char->ZombieBehavior);
     }

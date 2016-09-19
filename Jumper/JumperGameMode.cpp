@@ -1,4 +1,4 @@
-// Copyright 1998-2016 Epic Games, Inc. All Rights Reserved.
+// © 2016 Apollo Software, All rights reserved.
 
 #include "Jumper.h"
 #include "JumperGameMode.h"

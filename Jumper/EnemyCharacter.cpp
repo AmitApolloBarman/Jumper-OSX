@@ -33,20 +33,20 @@ void AEnemyCharacter::ProcessMode(EnemyMode m) {
 }
 
 void AEnemyCharacter::SetMode(uint8 m) {
-	/*
-	switch (m) {
-		case 0:SetMode(EnemyMode::Attack);  break;
-		case 1:SetMode(EnemyMode::Dead);  break;
-		case 2:SetMode(EnemyMode::Flee);  break;
-		case 3:SetMode(EnemyMode::Hit);  break;
-		case 4:SetMode(EnemyMode::Idle);  break;
-		case 5:SetMode(EnemyMode::Patrol);  break;
-		case 6:SetMode(EnemyMode::Pursue);  break;
-		case 7:SetMode(EnemyMode::Talk);  break;
-		case 8:SetMode(EnemyMode::Taunt);  break;
-		default:SetMode(EnemyMode::Pursue);  break;
+    if (Mode!=EnemyMode::Hit)
+        switch (m) {
+            case 0:SetMode(EnemyMode::Attack);  break;
+            case 1:SetMode(EnemyMode::Dead);  break;
+            case 2:SetMode(EnemyMode::Flee);  break;
+            case 3:SetMode(EnemyMode::Hit);  break;
+            case 4:SetMode(EnemyMode::Idle);  break;
+            case 5:SetMode(EnemyMode::Patrol);  break;
+            case 6:SetMode(EnemyMode::Pursue);  break;
+            case 7:SetMode(EnemyMode::Talk);  break;
+            case 8:SetMode(EnemyMode::Taunt);  break;
+            default:SetMode(EnemyMode::Pursue);  break;
 			break;	
-	}*/
+        }
 }
 
 void AEnemyCharacter::SetMode(EnemyMode m) {

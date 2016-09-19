@@ -1,4 +1,4 @@
-// Copyright 1998-2016 Epic Games, Inc. All Rights Reserved.
+// © 2016 Apollo Software, All rights reserved.
 #pragma once
 #include "GameFramework/Character.h"
 #include "JumperCharacter.generated.h"
