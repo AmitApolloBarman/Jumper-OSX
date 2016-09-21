@@ -1,4 +1,4 @@
-// (c) 2016 Apollo Software, All rights reserved.
+// © 2016 Apollo Software, All rights reserved.
 
 #include "Jumper.h"
 #include "SoundController.h"
@@ -29,6 +29,5 @@ void ASoundController::BeginPlay()
 void ASoundController::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
-
 }
 

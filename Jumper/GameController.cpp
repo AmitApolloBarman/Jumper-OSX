@@ -16,7 +16,6 @@ AGameController::AGameController() {
     ptr->time  = &time;
     ptr->fieldOfView = &fieldOfView;
     InitializeValues();
-    // Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 }
 
@@ -27,7 +26,6 @@ AGameController::AGameController(bool x) {
     ptr->time  = &time;
     ptr->fieldOfView = &fieldOfView;
     InitializeValues();
-    // Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
     PrimaryActorTick.bCanEverTick = x;
 }
 
@@ -45,6 +43,7 @@ void AGameController::InitializeValues() {
     *ptr->fieldOfView  = START_FOV;
     *ptr->skill = START_SKILL;
 }
+
 // Called when the game starts or when spawned
 void AGameController::BeginPlay() {
 	Super::BeginPlay();
@@ -56,15 +55,12 @@ void AGameController::BeginPlay() {
     skill= *ptr->skill;
     isAir = *ptr->isAir;
     fieldOfView = *ptr->fieldOfView;
-	//*ptr->fieldOfView = ToggleCamera(*ptr->fieldOfView);
 }
+
 void AGameController::xLerp (float mMin, float mMax, float mFactor, float value) {
     dayAndNight = gh.xLerp(mMin,mMax,mFactor + fabs(DeltaSpeed/2000),value);
-    /*
-    FString str = FString::SanitizeFloat(fabs(DeltaSpeed) + 0.5f);
-    dayAndNight = fabs(DeltaSpeed) + 0.25f;
-    bottomMessage = "" + str + "";*/
 }
+
 // Called every frame
 void AGameController::Tick( float DeltaTime ) {
     Super::Tick( DeltaTime );
@@ -74,7 +70,7 @@ void AGameController::Tick( float DeltaTime ) {
     if (BeginLogic())
         return;
     FovLogic();
-    SkillLogic();
+    SkillLogic(Cast<AJumperCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn()));
     LifeLogic();
     TimeLogic();
     DeltaSpeed = (FMath::Sin(RunningTime));
@@ -99,8 +95,7 @@ void AGameController::LifeLogic() {
         *ptr->life += LIFE_INC/2;
 }
 
-void AGameController::SkillLogic() {
-    AJumperCharacter *Avatar = Cast<AJumperCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
+void AGameController::SkillLogic(AJumperCharacter *Avatar) {
     if (Avatar) {
         if (!Avatar->isAir && !beginPlay && *ptr->skill<=MAX_SKILL && doSkillLogic)
             *ptr->skill += SKILL_INC*5;

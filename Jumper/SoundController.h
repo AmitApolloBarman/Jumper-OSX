@@ -1,4 +1,4 @@
-// (c) 2016 Apollo Software, All rights reserved.
+// © 2016 Apollo Software, All rights reserved.
 
 #pragma once
 
@@ -32,6 +32,5 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sound")
     UAudioComponent* SoundComponent;
 private:
-
 	
 };

@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// © 2016 Apollo Software, All rights reserved.
 
 #include "Jumper.h"
 #include "MyActorController.h"

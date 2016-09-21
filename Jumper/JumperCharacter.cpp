@@ -17,8 +17,7 @@ AJumperCharacter::AJumperCharacter()
 
 	// Create a camera boom attached to the root (capsule)
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
-	//CameraBoom->AttachTo(RootComponent);
-    CameraBoom->AttachToComponent(GetRootComponent(), FAttachmentTransformRules::KeepWorldTransform);
+	CameraBoom->SetupAttachment(GetRootComponent());
     CameraBoom->bAbsoluteRotation = true; // Rotation of the character should not affect rotation of boom
 	CameraBoom->bDoCollisionTest = false;
 	CameraBoom->TargetArmLength = 500.f;
@@ -27,8 +26,7 @@ AJumperCharacter::AJumperCharacter()
 
 	// Create a camera and attach to boom
 	SideViewCameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("SideViewCamera"));
-	//SideViewCameraComponent->AttachTo(CameraBoom, USpringArmComponent::SocketName);
-    SideViewCameraComponent->AttachToComponent(CameraBoom, FAttachmentTransformRules::KeepWorldTransform);
+    SideViewCameraComponent->SetupAttachment(CameraBoom);
 	SideViewCameraComponent->bUsePawnControlRotation = false; // We don't want the controller rotating the camera
 
 	// Configure character movement
@@ -51,6 +49,7 @@ AJumperCharacter::AJumperCharacter()
 void AJumperCharacter::DecrementSkill()
 {
 }
+
 // Input
 void AJumperCharacter::ToggleCrouch()
 {
@@ -66,6 +65,7 @@ void AJumperCharacter::ToggleCrouch()
         UnCrouch();
     }
 }
+
 void AJumperCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 {
 	// set up gameplay key bindings
@@ -87,8 +87,8 @@ void AJumperCharacter::MoveRight(float Value)
 
 void AJumperCharacter::NotifyJumpApex() {
     Super::NotifyJumpApex();
-    //isAir = false;
 }
+
 void AJumperCharacter::Jump() {
     Super::Jump();
     isAir = true;
@@ -104,11 +104,10 @@ void AJumperCharacter::Falling() {
 
 void AJumperCharacter::TouchStarted(const ETouchIndex::Type FingerIndex, const FVector Location)
 {
-    //Jump();
+    /* Touching the screen */
 }
 
 void AJumperCharacter::TouchStopped(const ETouchIndex::Type FingerIndex, const FVector Location)
 {
-	//StopJumping();
+    /* Let go of touching the screen */
 }
-

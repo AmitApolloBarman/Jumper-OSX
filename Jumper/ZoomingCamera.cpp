@@ -16,13 +16,13 @@ UZoomingCamera::UZoomingCamera()
 
 }
 
-
 // Method itself (Note the parameters)
 void UZoomingCamera::OnPickup()
 {
     APlayerController* PController= UGameplayStatics::GetPlayerController(GetWorld(), 0);
     PController->ConsoleCommand(TEXT("fov 95"), true);
 }
+
 // Called when the game starts
 void UZoomingCamera::BeginPlay()
 {
@@ -32,7 +32,6 @@ void UZoomingCamera::BeginPlay()
         PController->ConsoleCommand(TEXT("fov 107"), true);
 	
 }
-
 
 // Called every frame
 void UZoomingCamera::TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction )

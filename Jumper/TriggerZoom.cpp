@@ -11,6 +11,7 @@ ATriggerZoom::ATriggerZoom()
 	PrimaryActorTick.bCanEverTick = true;
 
 }
+
 void ATriggerZoom::OnOverlapBegin(class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
         ToggleCamera(90.0);
@@ -20,6 +21,7 @@ void ATriggerZoom::OnOverlapEnd(class AActor* OtherActor, class UPrimitiveCompon
 {
         ToggleCamera(107.0);
 }
+
 void ATriggerZoom::ToggleCamera(float x) {
     if (x >=107.0)
     {
@@ -32,6 +34,7 @@ void ATriggerZoom::ToggleCamera(float x) {
         PController->ConsoleCommand(TEXT("fov 90"), true);
     }
 }
+
 // Called when the game starts or when spawned
 void ATriggerZoom::BeginPlay()
 {

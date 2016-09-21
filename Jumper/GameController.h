@@ -132,7 +132,7 @@ public:
     bool BeginLogic();
     void FovLogic();
     void TimeLogic();
-    void SkillLogic();
+    void SkillLogic(AJumperCharacter *Avatar);
     void LifeLogic();
     void FinishView();
     void InitializeValues();

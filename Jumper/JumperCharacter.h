@@ -3,6 +3,20 @@
 #include "GameFramework/Character.h"
 #include "JumperCharacter.generated.h"
 
+// State Machine Mode for Hero
+UENUM(BlueprintType)
+enum class HeroMode : uint8
+{
+    Attack      UMETA(DisplayName="Attack"),
+    Dead        UMETA(DisplayName="Dead"),
+    Hit         UMETA(DisplayName="Hit"),
+    Idle        UMETA(DisplayName="Idle"),
+    Jump        UMETA(DisplayName="Jump"),
+    Talk        UMETA(DisplayName="Talk"),
+    Taunt       UMETA(DisplayName="Taunt"),
+    Walk        UMETA(DisplayName="Walk")
+};
+
 UCLASS(config=Game)
 class AJumperCharacter : public ACharacter
 {
@@ -34,11 +48,12 @@ protected:
     virtual void Falling() override;
     virtual void Jump() override;
     virtual void StopJumping() override;
+
 public:
-	AJumperCharacter();
+
+    AJumperCharacter();
     void DecrementSkill();
     void ToggleCrouch();
-
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "JumperCharacter")
     FVector2D ViewportSize = FVector2D(0,360);
@@ -50,6 +65,9 @@ public:
     bool isAir;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "JumperCharacter")
     bool isCrouch;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "JumperCharacter")
+    HeroMode Mode = HeroMode::Idle;
+    
     /** Returns SideViewCameraComponent subobject **/
 	FORCEINLINE class UCameraComponent* GetSideViewCameraComponent() const { return SideViewCameraComponent; }
 	/** Returns CameraBoom subobject **/
